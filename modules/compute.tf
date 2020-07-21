@@ -1,5 +1,5 @@
 resource "google_compute_instance" "example" {
-  name          = "example"
+  name          = "internal-apache"
   machine_type  = "n2-standard-2"
   zone          = "us-central1-a"
   
@@ -10,12 +10,17 @@ resource "google_compute_instance" "example" {
   }
   
   network_interface {
-    network = "default"
-
+    network = "main-vpc"
+    subnetwork = "sub3"
     access_config {
       // Ephemeral IP
     }
   }
   
   tags = ["terraform-example"]
+  
+  metadata = {
+    startup-script = "apt-get -y update && apt-get -y install apache2 && service apache start"
+  } 
+
 }

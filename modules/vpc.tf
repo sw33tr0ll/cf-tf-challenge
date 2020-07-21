@@ -27,3 +27,14 @@ resource "google_compute_subnetwork" "sub4" {
   network = "main-vpc"
   ip_cidr_range = "10.0.3.0/24"
 }
+
+resource "google_compute_firewall" "allow-public" {
+  name    = "allow-public"
+  network = "main-vpc"
+  allow {
+    protocol = "tcp"
+    ports    = ["22","80","443"]
+  }
+  source_ranges = ["0.0.0.0/8"]
+  target_tags = ["allow-public"]
+}
