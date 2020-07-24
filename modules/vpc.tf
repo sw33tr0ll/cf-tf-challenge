@@ -20,12 +20,14 @@ resource "google_compute_subnetwork" "sub3" {
   name = "sub3"
   network = "main-vpc"
   ip_cidr_range = "10.0.2.0/24"
+  private_ip_google_access = "true"
 }
 
 resource "google_compute_subnetwork" "sub4" {
   name = "sub4"
   network = "main-vpc"
   ip_cidr_range = "10.0.3.0/24"
+  private_ip_google_access = "true"
 }
 
 resource "google_compute_firewall" "allow-public" {
